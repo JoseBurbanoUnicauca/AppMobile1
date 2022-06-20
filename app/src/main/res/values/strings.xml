@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">TINDU</string>
+
+    <string name="btn_iniciar_pantalla">Iniciar Sesión</string>
+    <string name="btn_registrar_pantalla">Registrarse</string>
+
+    <string name="btn_iniciar_sesion">INICIAR SESION</string>
+
+    <string name="btn_registrarse">REGISTRARSE</string>
+
+    <string name="btn_salir">OUT</string>
+
+</resources>

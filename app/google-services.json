@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "53316585740",
+    "project_id": "inicio-registro-b57d4",
+    "storage_bucket": "inicio-registro-b57d4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53316585740:android:f92034d5202b4e3696a129",
+        "android_client_info": {
+          "package_name": "com.example.inicio_registro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53316585740-e6nqg1hj1scgc4vb1vap0cfnblofuiff.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUDl1i_36TQZlMGpR8TfD-d7EMkLpwpHI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "53316585740-e6nqg1hj1scgc4vb1vap0cfnblofuiff.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
