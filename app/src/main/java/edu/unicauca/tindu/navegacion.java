@@ -1,4 +1,4 @@
-package com.example.inicio_registro;
+package edu.unicauca.tindu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import edu.unicauca.tindu.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class navegacion extends AppCompatActivity {

@@ -1,7 +1,4 @@
-package com.example.inicio_registro;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+package edu.unicauca.tindu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,11 +6,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import edu.unicauca.tindu.R;
 
 public class IniciarSesionActivity extends AppCompatActivity {
     private EditText correo;
@@ -47,7 +49,7 @@ public class IniciarSesionActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(getApplication(),"Authentication exitosa.",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplication(),"Autenticacion exitosa.",Toast.LENGTH_LONG).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             Intent i = new Intent(getApplicationContext(),navegacion.class);
                             startActivity(i);
@@ -56,7 +58,7 @@ public class IniciarSesionActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
 
-                            Toast.makeText(getApplication(),"Authentication failed.",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplication(),"Autenticacion fallida.",Toast.LENGTH_LONG).show();
                             //updateUI(null);
                         }
 

@@ -1,4 +1,4 @@
-package com.example.inicio_registro;
+package edu.unicauca.tindu;
 
 import org.junit.Test;
 

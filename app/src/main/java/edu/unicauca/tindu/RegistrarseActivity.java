@@ -1,4 +1,4 @@
-package com.example.inicio_registro;
+package edu.unicauca.tindu;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import edu.unicauca.tindu.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -50,7 +51,7 @@ public class RegistrarseActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
-                                Toast.makeText(getApplication(),"usuario creado",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplication(),"Usuario creado - Ya puede iniciar sesión",Toast.LENGTH_LONG).show();
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Intent i = new Intent(getApplicationContext(),MainActivity.class);
                                 startActivity(i);
@@ -59,7 +60,7 @@ public class RegistrarseActivity extends AppCompatActivity {
                             } else {
                                 // If sign in fails, display a message to the user.
 
-                                Toast.makeText(getApplication(),"Authentication failed.",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplication(),"No fue posible crear el usuario.",Toast.LENGTH_LONG).show();
                                 //updateUI(null);
                             }
                         }

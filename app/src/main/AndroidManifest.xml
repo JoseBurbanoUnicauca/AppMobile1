@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.inicio_registro">
+    package="edu.unicauca.tindu">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -16,16 +16,16 @@
         android:theme="@style/Theme.Inicio_registro"
         tools:targetApi="31">
         <activity
-            android:name=".navegacion"
+            android:name="edu.unicauca.tindu.navegacion"
             android:exported="false" />
         <activity
-            android:name=".RegistrarseActivity"
+            android:name="edu.unicauca.tindu.RegistrarseActivity"
             android:exported="false" />
         <activity
-            android:name=".IniciarSesionActivity"
+            android:name="edu.unicauca.tindu.IniciarSesionActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="edu.unicauca.tindu.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
