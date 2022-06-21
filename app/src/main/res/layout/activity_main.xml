@@ -41,12 +41,12 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="80dp" />
+            android:layout_height="77dp" />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="100dp"
-            android:layout_height="155dp"
+            android:layout_height="187dp"
             app:srcCompat="@drawable/uni" />
 
     </LinearLayout>

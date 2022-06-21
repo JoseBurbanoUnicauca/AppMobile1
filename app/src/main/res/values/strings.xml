@@ -1,13 +1,15 @@
 <resources>
     <string name="app_name">TINDU</string>
-
     <string name="btn_iniciar_pantalla">Iniciar Sesión</string>
     <string name="btn_registrar_pantalla">Registrarse</string>
-
-    <string name="btn_iniciar_sesion">INICIAR SESION</string>
-
+    <string name="btn_iniciar_sesion">INICIAR SESIÓN</string>
     <string name="btn_registrarse">REGISTRARSE</string>
-
-    <string name="btn_salir">OUT</string>
-
+    <string name="btn_salir">Cerrar Sesión</string>
+    <string name="btn_creditos">Creditos</string>
+    <string name="btn_config">Configuración</string>
+    <string name="des1">Nicolas Zambrano</string>
+    <string name="des2">Jose Eduardo Burbano</string>
+    <string name="des3">Diego Casanova</string>
+    <string name="des4">Joan Sebastian Muñoz</string>
+    <string name="col">Color Alternativo</string>
 </resources>
