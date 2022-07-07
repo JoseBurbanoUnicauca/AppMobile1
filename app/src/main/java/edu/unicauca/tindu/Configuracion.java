@@ -12,19 +12,35 @@ import java.util.List;
 
 public class Configuracion extends AppCompatActivity {
 
+    public Switch s1,s2,s3,s4,s5,s6;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracion);
-        Switch s1 = (Switch) findViewById(R.id.switch1);
-        Switch s2 = (Switch) findViewById(R.id.switch3);
-        Switch s3 = (Switch) findViewById(R.id.switch4);
-        Switch s4 = (Switch) findViewById(R.id.switch5);
-        Switch s5 = (Switch) findViewById(R.id.switch6);
-        Switch s6 = (Switch) findViewById(R.id.switch7);
+
+        //Config update from database
         getConfigs();
+        //Config save when changes detected
 
+    }
 
+    @Override
+    protected void onPause() {
+        saveconfig();
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        //saveconfig();
+        super.onStop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getConfigs();
     }
 
     private void getConfigs() {
@@ -45,18 +61,21 @@ public class Configuracion extends AppCompatActivity {
                 //configItems.clear();
                 //dbconfigItems.clear();
                 else {
-                    Switch s1 = (Switch) findViewById(R.id.switch1);
+                    s1 = findViewById(R.id.switch1);
+                    s2 = findViewById(R.id.switch3);
+                    s3 = findViewById(R.id.switch4);
+                    s4 = findViewById(R.id.switch5);
+                    s5 = findViewById(R.id.switch6);
+                    s6 = findViewById(R.id.switch7);
+
                     s1.setChecked(configs.get(0).getConfig());
-                    Switch s2 = (Switch) findViewById(R.id.switch3);
                     s2.setChecked(configs.get(1).getConfig());
-                    Switch s3 = (Switch) findViewById(R.id.switch4);
                     s3.setChecked(configs.get(2).getConfig());
-                    Switch s4 = (Switch) findViewById(R.id.switch5);
                     s4.setChecked(configs.get(3).getConfig());
-                    Switch s5 = (Switch) findViewById(R.id.switch6);
                     s5.setChecked(configs.get(4).getConfig());
-                    Switch s6 = (Switch) findViewById(R.id.switch7);
                     s6.setChecked(configs.get(5).getConfig());
+
+                    configs.clear();
                 }
             }
         }
@@ -92,38 +111,40 @@ public class Configuracion extends AppCompatActivity {
         initconfig.execute();
     }
 
-    public void saveconfig() {
-        class Saveconfig extends AsyncTask<Void, Void, List<TinduDB>> {
+    private void saveconfig() {
+        class Saveconfig extends AsyncTask<Void, Void, Void> {
 
             @Override
-            protected List<TinduDB> doInBackground(Void... voids) {
-                List<TinduDB> optList = TinduDBDatabaseAccesor.getInstance(getApplication()).TinduDBDAO().loadAllItems();
-                return optList;
-            }
+            protected Void doInBackground(Void... voids) {
+                List<TinduDB> configsav = TinduDBDatabaseAccesor.getInstance(getApplication()).TinduDBDAO().loadAllItems();
 
-            @Override
-            protected void onPostExecute(List<TinduDB> configs) {
-                super.onPostExecute(configs);
-                    Switch s1 = (Switch) findViewById(R.id.switch1);
-                    TinduDB config1 = new TinduDB(s1.isChecked(), "Change", java.lang.System.currentTimeMillis());
-                    configs.set(0,config1);
-                    Switch s2 = (Switch) findViewById(R.id.switch3);
-                    TinduDB config2 = new TinduDB(s2.isChecked(), "Change", java.lang.System.currentTimeMillis());
-                    configs.set(1,config2);
-                    Switch s3 = (Switch) findViewById(R.id.switch4);
-                    TinduDB config3 = new TinduDB(s3.isChecked(), "Change", java.lang.System.currentTimeMillis());
-                    configs.set(2,config3);
-                    Switch s4 = (Switch) findViewById(R.id.switch5);
-                    TinduDB config4 = new TinduDB(s4.isChecked(), "Change", java.lang.System.currentTimeMillis());
-                    configs.set(3,config4);
-                    Switch s5 = (Switch) findViewById(R.id.switch6);
-                    TinduDB config5 = new TinduDB(s5.isChecked(), "Change", java.lang.System.currentTimeMillis());
-                    configs.set(4,config5);
-                    Switch s6 = (Switch) findViewById(R.id.switch7);
-                    TinduDB config6 = new TinduDB(s6.isChecked(), "Change", java.lang.System.currentTimeMillis());
-                    configs.set(5,config6);
+                //DB Delete
+                TinduDBDatabaseAccesor.getInstance(getApplication()).TinduDBDAO().deleteAllItems();
 
-                    TinduDBDatabaseAccesor.getInstance(getApplication()).TinduDBDAO().updateTinduDBs(configs);
+                TinduDB config = new TinduDB(s1.isChecked(), "Change1", java.lang.System.currentTimeMillis());
+                configsav.set(0,config);
+
+                config = new TinduDB(s2.isChecked(), "Change2", java.lang.System.currentTimeMillis());
+                configsav.set(1,config);
+
+                config = new TinduDB(s3.isChecked(), "Change3", java.lang.System.currentTimeMillis());
+                configsav.set(2,config);
+
+                config = new TinduDB(s4.isChecked(), "Change4", java.lang.System.currentTimeMillis());
+                configsav.set(3,config);
+
+                config = new TinduDB(s5.isChecked(), "Change5", java.lang.System.currentTimeMillis());
+                configsav.set(4,config);
+
+                config = new TinduDB(s6.isChecked(), "Change6", java.lang.System.currentTimeMillis());
+                configsav.set(5,config);
+
+                //DB Update
+                TinduDBDatabaseAccesor.getInstance(getApplication()).TinduDBDAO().insertTinduDBs(configsav);
+
+                configsav.clear();
+
+                return null;
             }
         }
 
