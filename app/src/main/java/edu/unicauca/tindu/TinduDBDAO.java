@@ -24,7 +24,7 @@ public interface TinduDBDAO {
     @Delete
     public void deleteTinduDB(TinduDB item);
 
-    @Query("SELECT * FROM tindudb ORDER BY timestamp DESC")
+    @Query("SELECT * FROM tindudb ORDER BY id ASC")
     public List<TinduDB> loadAllItems();
 
     @Query("DELETE FROM tindudb")

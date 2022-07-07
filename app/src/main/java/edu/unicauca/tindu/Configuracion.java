@@ -2,6 +2,7 @@ package edu.unicauca.tindu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Switch;
@@ -12,12 +13,20 @@ import java.util.List;
 
 public class Configuracion extends AppCompatActivity {
 
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     public Switch s1,s2,s3,s4,s5,s6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracion);
+
+        s1 = findViewById(R.id.switch1);
+        s2 = findViewById(R.id.switch3);
+        s3 = findViewById(R.id.switch4);
+        s4 = findViewById(R.id.switch5);
+        s5 = findViewById(R.id.switch6);
+        s6 = findViewById(R.id.switch7);
 
         //Config update from database
         getConfigs();
@@ -33,7 +42,7 @@ public class Configuracion extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        //saveconfig();
+        saveconfig();
         super.onStop();
     }
 
@@ -58,16 +67,7 @@ public class Configuracion extends AppCompatActivity {
                 if (configs.size() == 0) {
                     initconfig();
                 }
-                //configItems.clear();
-                //dbconfigItems.clear();
                 else {
-                    s1 = findViewById(R.id.switch1);
-                    s2 = findViewById(R.id.switch3);
-                    s3 = findViewById(R.id.switch4);
-                    s4 = findViewById(R.id.switch5);
-                    s5 = findViewById(R.id.switch6);
-                    s6 = findViewById(R.id.switch7);
-
                     s1.setChecked(configs.get(0).getConfig());
                     s2.setChecked(configs.get(1).getConfig());
                     s3.setChecked(configs.get(2).getConfig());
@@ -75,7 +75,7 @@ public class Configuracion extends AppCompatActivity {
                     s5.setChecked(configs.get(4).getConfig());
                     s6.setChecked(configs.get(5).getConfig());
 
-                    configs.clear();
+                    //configs.clear();
                 }
             }
         }
@@ -91,7 +91,7 @@ public class Configuracion extends AppCompatActivity {
             protected Void doInBackground(Void... voids) {
                 //adding to database
                 for (int i = 0; i < 6; i++) {
-                    TinduDB configstart = new TinduDB(true, "Default", java.lang.System.currentTimeMillis());
+                    TinduDB configstart = new TinduDB(false, "Default");
                     TinduDBDatabaseAccesor.getInstance(getApplication()).TinduDBDAO().insertTinduDB(configstart);
                 }
                 return null;
@@ -121,28 +121,28 @@ public class Configuracion extends AppCompatActivity {
                 //DB Delete
                 TinduDBDatabaseAccesor.getInstance(getApplication()).TinduDBDAO().deleteAllItems();
 
-                TinduDB config = new TinduDB(s1.isChecked(), "Change1", java.lang.System.currentTimeMillis());
-                configsav.set(0,config);
-
-                config = new TinduDB(s2.isChecked(), "Change2", java.lang.System.currentTimeMillis());
-                configsav.set(1,config);
-
-                config = new TinduDB(s3.isChecked(), "Change3", java.lang.System.currentTimeMillis());
-                configsav.set(2,config);
-
-                config = new TinduDB(s4.isChecked(), "Change4", java.lang.System.currentTimeMillis());
-                configsav.set(3,config);
-
-                config = new TinduDB(s5.isChecked(), "Change5", java.lang.System.currentTimeMillis());
-                configsav.set(4,config);
-
-                config = new TinduDB(s6.isChecked(), "Change6", java.lang.System.currentTimeMillis());
-                configsav.set(5,config);
-
+                TinduDB config = new TinduDB(s1.isChecked(), "Change1");
+                //configsav.set(0,config);
+                TinduDBDatabaseAccesor.getInstance(getApplication()).TinduDBDAO().insertTinduDB(config);
+                config = new TinduDB(s2.isChecked(), "Change2");
+                //configsav.set(1,config);
+                TinduDBDatabaseAccesor.getInstance(getApplication()).TinduDBDAO().insertTinduDB(config);
+                config = new TinduDB(s3.isChecked(), "Change3");
+                //configsav.set(2,config);
+                TinduDBDatabaseAccesor.getInstance(getApplication()).TinduDBDAO().insertTinduDB(config);
+                config = new TinduDB(s4.isChecked(), "Change4");
+                //configsav.set(3,config);
+                TinduDBDatabaseAccesor.getInstance(getApplication()).TinduDBDAO().insertTinduDB(config);
+                config = new TinduDB(s5.isChecked(), "Change5");
+                //configsav.set(4,config);
+                TinduDBDatabaseAccesor.getInstance(getApplication()).TinduDBDAO().insertTinduDB(config);
+                config = new TinduDB(s6.isChecked(), "Change6");
+                //configsav.set(5,config);
+                TinduDBDatabaseAccesor.getInstance(getApplication()).TinduDBDAO().insertTinduDB(config);
                 //DB Update
-                TinduDBDatabaseAccesor.getInstance(getApplication()).TinduDBDAO().insertTinduDBs(configsav);
+                //TinduDBDatabaseAccesor.getInstance(getApplication()).TinduDBDAO().insertTinduDBs(configsav);
 
-                configsav.clear();
+                //configsav.clear();
 
                 return null;
             }
