@@ -11,5 +11,10 @@
     <string name="des2">Jose Eduardo Burbano</string>
     <string name="des3">Diego Casanova</string>
     <string name="des4">Joan Sebastian Muñoz</string>
-    <string name="col">Color Alternativo</string>
+    <string name="conf1">Configuracion 1</string>
+    <string name="conf2">Configuracion 2</string>
+    <string name="conf3">Configuracion 3</string>
+    <string name="conf4">Configuracion 4</string>
+    <string name="conf5">Configuracion 5</string>
+    <string name="conf6">Configuracion 6</string>
 </resources>
