@@ -22,7 +22,7 @@
             android:name=".Configuracion"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".navegacion"
             android:exported="false" />
 
         <activity
@@ -35,7 +35,7 @@
             android:name=".DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".navegacion"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
