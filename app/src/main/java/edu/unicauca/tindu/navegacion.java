@@ -2,9 +2,14 @@ package edu.unicauca.tindu;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +21,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import edu.unicauca.tindu.R;
+
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -27,6 +34,11 @@ public class navegacion extends AppCompatActivity implements EventoAdaptador.Rec
     private EventoAdaptador adapter;
     private List<Eventos> items;
     private FirebaseAuth mAuth;
+    private DrawerLayout mDrawer;
+    private Toolbar toolbar;
+    private NavigationView nvDrawer;
+
+    private ActionBarDrawerToggle drawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +52,7 @@ public class navegacion extends AppCompatActivity implements EventoAdaptador.Rec
         initValues();
 
         //Definicion de la barra de menu
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar();
         ActionBar actionBar = getSupportActionBar();
@@ -48,7 +60,79 @@ public class navegacion extends AppCompatActivity implements EventoAdaptador.Rec
         //Titulo de la barra de menu
         actionBar.setTitle("  TindU | Menu Principal");
 
+        // Icono alterno barra menu
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Vista del drawer
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerToggle = setupDrawerToggle();
+
+
+        // Cambio icono alterno barra menu
+        drawerToggle.setDrawerIndicatorEnabled(true);
+        drawerToggle.syncState();
+
+        // Unir el boton alterno al drawer
+        mDrawer.addDrawerListener(drawerToggle);
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        // Colocacion de vista del drawer
+        setupDrawerContent(nvDrawer);
+
     }
+
+    private ActionBarDrawerToggle setupDrawerToggle() {
+        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
+    }
+
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        selectDrawerItem(menuItem);
+                        return true;
+                    }
+                });
+    }
+
+    public void selectDrawerItem(MenuItem menuItem) {
+        // Menu del drawer
+        Fragment fragment = null;
+        Class fragmentClass;
+        switch(menuItem.getItemId()) {
+            case R.id.nav_act:
+                fragmentClass = null;
+                break;
+            case R.id.nav_chat:
+                fragmentClass = Chat.class;
+                break;
+            case R.id.nav_perfil:
+                fragmentClass = Perfil.class;
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + menuItem.getItemId());
+        }
+
+        try {
+            if(fragmentClass != null){
+                fragment = (Fragment) fragmentClass.newInstance();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+            }
+            else{
+                getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.flContent)).commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        menuItem.setChecked(true);
+        // Marco la seleccion del menu
+        setTitle(menuItem.getTitle());
+        // Cierro el drawer
+        mDrawer.closeDrawers();
+    }
+
     //Inflate del menu en la barra de aplicacion
     @Override
     public boolean onCreateOptionsMenu( Menu menu ) {
@@ -76,6 +160,9 @@ public class navegacion extends AppCompatActivity implements EventoAdaptador.Rec
                 startActivity(i1);
                 finish();
                 break;
+            case android.R.id.home:
+                mDrawer.openDrawer(GravityCompat.START);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

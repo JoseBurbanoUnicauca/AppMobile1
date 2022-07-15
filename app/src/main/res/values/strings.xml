@@ -17,4 +17,8 @@
     <string name="conf4">Configuracion 4</string>
     <string name="conf5">Configuracion 5</string>
     <string name="conf6">Configuracion 6</string>
+    <string name="drawer_open">Abrir Funciones</string>
+    <string name="drawer_close">Cerrar Funciones</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
